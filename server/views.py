@@ -21,6 +21,6 @@ def get_forecast():
         ImageGenerator.generate_svg(request.args.get('battery'))
     else:
         ImageGenerator.generate_svg()
-    subprocess.check_output(['/usr/bin/inkscape', '-z', '-e', 'result.png', '-w', '600', '-h', '800', 'result.svg'])
+    subprocess.check_output(['/usr/bin/inkscape', '-z', '-e', 'result.png', '-w', '600', '-h', '800', '-y', '255', 'result.svg'])
 
     return send_file('../result.png', mimetype='image/png')

@@ -60,7 +60,7 @@ def generate_svg(battery='N/A'):
 			choivan = item.find('{Concellos}pChoivaN').text
 
 			day = {
-				'date': preddate.strftime('%A, %d %b. %Y'),
+				'date': preddate.strftime('%a, %d %b. %Y'),
 				'temp': [tmin, tmax],
 				'sky': [ceom, ceot, ceon],
 				'wind': [str(vsmin), str(vsmax)],
@@ -71,6 +71,8 @@ def generate_svg(battery='N/A'):
 	### Modify image to be shown
 	output = codecs.open('template.svg','r',encoding='utf-8').read()
 
+	### Set battery level
+	output = output.replace('$battery', battery)
 	### Set weather values
 	for i in range(0,3):
 		output = output.replace('$date{0}'.format(i), information[i]['date'])
@@ -93,9 +95,6 @@ def generate_svg(battery='N/A'):
 			#iconplace = svgtemplateroot.find('.//{{http://www.w3.org/2000/svg}}path[@id="icon{0}{1}"]'.format(i,j))
 			#print(iconplace.tag)
 			output = output.replace('$icon{0}{1}'.format(i,j), icon)
-
-
-
 
 	### Write output
 	codecs.open('result.svg','w',encoding='utf-8').write(output)

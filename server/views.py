@@ -13,7 +13,7 @@ def index():
 @server.route('/meteogalicia')
 def get_forecast():
     try:
-        subprocess.check_output(['/bin/rm', 'result.png', 'result.svg'])
+        subprocess.check_output(['/bin/rm', 'result.png', 'result.svg', 'result_crush.png'])
     except subprocess.CalledProcessError:
         pass
 
@@ -22,5 +22,6 @@ def get_forecast():
     else:
         ImageGenerator.generate_svg()
     subprocess.check_output(['/usr/bin/inkscape', '-z', '-e', 'result.png', '-w', '600', '-h', '800', '-y', '255', 'result.svg'])
+    subprocess.check_output(['/usr/bin/pngcrush', '-c', '0', '-nofilecheck', 'result.png', 'result_crush.png'])
 
-    return send_file('../result.png', mimetype='image/png')
+    return send_file('../result_crush.png', mimetype='image/png')

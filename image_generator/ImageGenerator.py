@@ -18,7 +18,8 @@ def generate_svg(battery='N/A'):
 		for item in channel.findall('item'):
 			#date = dateparse(item.find('{Concellos}dataCreacion').text)
 			#print(date)
-			preddate = dateparse(item.find('{Concellos}dataPredicion').text)
+			preddate = dateparse(item.find('{Concellos}dataPredicion').text,dayfirst=True)
+			print(preddate)
 
 			tmax = item.find('{Concellos}tMax').text
 			tmin = item.find('{Concellos}tMin').text

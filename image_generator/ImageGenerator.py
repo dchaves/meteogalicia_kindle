@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from urllib.request import urlopen
+import urllib3
 import xml.etree.ElementTree as ET
 from dateutil.parser import parse as dateparse
 import json
@@ -10,7 +10,8 @@ def generate_svg(battery='N/A'):
 	locale.setlocale(locale.LC_TIME, "es_ES")
 	COD_TUI = 36055
 	URL = "http://servizos.meteogalicia.gal/rss/predicion/rssLocalidades.action?idZona={0}&dia=-1&request_locale=gl".format(COD_TUI)
-	respxml = urlopen(URL).read()
+	urllib = urllib3.PoolManager()
+	respxml = urllib.request('GET',URL).data
 	root = ET.fromstring(respxml)
 	information = []
 	for channel in root:
@@ -75,7 +76,7 @@ def generate_svg(battery='N/A'):
 	output = output.replace('$battery', battery)
 	### Set weather values
 	for i in range(0,3):
-		output = output.replace('$date{0}'.format(i), information[i]['date'])
+		output = output.replace('$date{0}'.format(i), information[i]['date'].decode('latin-1'))
 		output = output.replace('$tempmin{0}'.format(i), information[i]['temp'][0])
 		output = output.replace('$tempmax{0}'.format(i), information[i]['temp'][1])
 		output = output.replace('$windmin{0}'.format(i), information[i]['wind'][0])
@@ -97,4 +98,4 @@ def generate_svg(battery='N/A'):
 			output = output.replace('$icon{0}{1}'.format(i,j), icon)
 
 	### Write output
-	codecs.open('result.svg','w',encoding='utf-8').write(output)
+	codecs.open('/tmp/result.svg','w',encoding='utf-8').write(output)

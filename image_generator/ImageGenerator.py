@@ -19,7 +19,7 @@ def generate_svg(battery='N/A'):
 			#date = dateparse(item.find('{Concellos}dataCreacion').text)
 			#print(date)
 			preddate = dateparse(item.find('{Concellos}dataPredicion').text,dayfirst=True)
-			print(preddate)
+			#print(preddate)
 
 			tmax = item.find('{Concellos}tMax').text
 			tmin = item.find('{Concellos}tMin').text

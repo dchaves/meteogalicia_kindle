@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ROWN=0
-SLEEPTIME=7200
+SLEEPTIME=3600
 LOGFILE="/tmp/meteogalicia.log"
 SSFILE="/mnt/us/linkss/screensavers/00.meteogalicia.png"
 ERRORFILE="/mnt/us/linkss/backups/600x800/01.error.png"

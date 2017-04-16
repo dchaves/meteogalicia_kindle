@@ -5,6 +5,7 @@ from dateutil.parser import parse as dateparse
 import json
 import locale
 import codecs
+import math
 
 def generate_svg(battery='N/A'):
 	locale.setlocale(locale.LC_TIME, "es_ES")
@@ -75,6 +76,17 @@ def generate_svg(battery='N/A'):
 
 	### Set battery level
 	output = output.replace('$battery', battery)
+	if battery == "N/A":
+		battlevel = 0
+	else:
+		battlevel = int(math.ceil(float(battery)/20)-1)
+	battpath = 'meteo_icons/batt_{0}.svg'.format(battlevel)
+	print battpath
+	battimage = codecs.open(battpath,'r',encoding='utf-8').read()
+	batsvgroot = ET.fromstring(battimage)
+	batticonpath = batsvgroot.find('{http://www.w3.org/2000/svg}path')
+	batticon = batticonpath.attrib['d']
+	output = output.replace('$batticon', batticon)
 	### Set weather values
 	for i in range(0,3):
 		output = output.replace('$date{0}'.format(i), information[i]['date'].decode('latin-1'))
@@ -85,7 +97,7 @@ def generate_svg(battery='N/A'):
 		output = output.replace('$rain{0}0'.format(i), information[i]['rain'][0])
 		output = output.replace('$rain{0}1'.format(i), information[i]['rain'][1])
 		output = output.replace('$rain{0}2'.format(i), information[i]['rain'][2])
-	### Set weather icons
+		### Set weather icons
 		#svgtemplateroot = ET.fromstring(output)
 		for j in range (0,3):
 			imagepath = 'meteo_icons/{0}.svg'.format(information[i]['sky'][j])

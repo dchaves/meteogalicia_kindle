@@ -40,9 +40,9 @@
      inkscape:window-height="1014"
      id="namedview31"
      showgrid="false"
-     inkscape:zoom="0.5603821"
-     inkscape:cx="-232.22303"
-     inkscape:cy="288.33663"
+     inkscape:zoom="1.1207642"
+     inkscape:cx="-225.50671"
+     inkscape:cy="626.1739"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -784,46 +784,6 @@
        id="tspan3074-0-4-8-4"
        x="560.41553"
        y="776.80017">%</tspan></text>
-  <rect
-     style="fill:none;stroke:#000000;stroke-width:2.89765525;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-     id="rect4700-9"
-     width="39.118343"
-     height="57.125202"
-     x="119.26936"
-     y="12.029191"
-     ry="4.1395073" />
-  <rect
-     style="fill:none;stroke:#000000;stroke-width:1.85449922;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-     id="rect4702-0"
-     width="11.524388"
-     height="1.4571067"
-     x="133.50926"
-     y="9.2308865"
-     ry="0.72855335" />
-  <rect
-     style="fill:#000000;fill-opacity:1;stroke:none"
-     id="rect4704-1"
-     width="30.839333"
-     height="10.348765"
-     x="123.40886"
-     y="53.631226"
-     ry="0" />
-  <rect
-     style="fill:#000000;fill-opacity:1;stroke:none"
-     id="rect4704-7-6"
-     width="30.839333"
-     height="10.348765"
-     x="123.40886"
-     y="41.433475"
-     ry="0" />
-  <rect
-     style="fill:#000000;fill-opacity:1;stroke:none"
-     id="rect4704-77-1"
-     width="30.839333"
-     height="10.348765"
-     x="123.40886"
-     y="29.235743"
-     ry="0" />
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono Bold"
@@ -846,4 +806,21 @@
        id="tspan3118-5"
        x="108.58592"
        y="64.074387">%</tspan></text>
+  <g
+     id="gbatt"
+     transform="translate(117.821,8.3034166)">
+    <rect
+       inkscape:label="#rect3708"
+       height="62.299583"
+       width="42.015999"
+       id="batticon"
+       style="fill:none;stroke:none"
+       x="0"
+       y="0" />
+    <path
+       inkscape:connector-curvature="0"
+       d="$batticon"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       id="path3458" />
+  </g>
 </svg>

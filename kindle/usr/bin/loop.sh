@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ROWN=0
-SLEEPTIME=7200
+SLEEPTIME=3600
 LOGFILE="/tmp/meteogalicia.log"
 SSFILE="/mnt/us/linkss/screensavers/00.meteogalicia.png"
 ERRORFILE="/mnt/us/linkss/backups/600x800/01.error.png"
@@ -38,13 +38,23 @@ program_wakeup() {
 }
 
 do_wakeup() {
+        print "DO WAKEUP"
         powerd_test -p
-        sleep 30
+        while is_not_in_state "active"; do
+          sleep 1
+        done
+        print "WAKEUP DONE"
 }
 
 do_sleep() {
+        print "DO SLEEP"
         powerd_test -p
-        sleep 30
+        while is_not_in_state "screenSaver"; do
+          sleep 1
+        done
+        sleep 5
+        eips -g "$SSFILE"
+        print "SLEEP DONE"
 }
 
 wifienable() {
@@ -64,6 +74,7 @@ wifi_not_connected() {
 }
 
 do_things() {
+      print "DO THINGS"
       mntroot rw
       cp -f "$ERRORFILE" "$SSFILE"
       eips -c
@@ -83,9 +94,11 @@ do_things() {
       sleep 5
       wifidisable
       mntroot ro
+      print "THINGS DONE"
 }
 
 do_silent_things() {
+      print "DO STEALTHY THINGS"
       mntroot rw
       cp -f "$ERRORFILE" "$SSFILE"
       gprsdisable
@@ -98,6 +111,7 @@ do_silent_things() {
       curl "$URL" > "$SSFILE"
       wifidisable
       mntroot ro
+      print "STEALTHY THINGS DONE"
 }
 
 wait_for_event() {
@@ -111,6 +125,7 @@ get_state() {
 init
 while [ 1 -eq 1 ]; do
   print "START LOOP"
+  print "$(get_state)"
   if is_not_in_state "active"; then
     do_wakeup
     do_things
@@ -123,7 +138,7 @@ while [ 1 -eq 1 ]; do
   while [ "$(echo $LAST_EVENT | awk '/readyToSuspend/{print $2}')" != "6" ]; do
     LAST_EVENT="$(lipc-wait-event com.lab126.powerd *)"
     print "$LAST_EVENT"
-    print "$(get_state)"
+    #print "$(get_state)"
   done
   program_wakeup $SLEEPTIME
   sleep 10

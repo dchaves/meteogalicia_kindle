@@ -6,6 +6,7 @@ import json
 import locale
 import codecs
 import math
+import time
 
 def generate_svg(battery='N/A'):
 	locale.setlocale(locale.LC_TIME, "es_ES")
@@ -74,6 +75,9 @@ def generate_svg(battery='N/A'):
 	### Modify image to be shown
 	output = codecs.open('template.svg','r',encoding='utf-8').read()
 
+	### Set update timestamp
+	output = output.replace('$curdate', time.strftime("%c").decode('latin-1'))
+	
 	### Set battery level
 	output = output.replace('$battery', battery)
 	if battery == "N/A":

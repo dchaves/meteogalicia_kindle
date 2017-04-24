@@ -77,7 +77,7 @@ def generate_svg(battery='N/A'):
 
 	### Set update timestamp
 	output = output.replace('$curdate', time.strftime("%c").decode('latin-1'))
-	
+
 	### Set battery level
 	output = output.replace('$battery', battery)
 	if battery == "N/A":

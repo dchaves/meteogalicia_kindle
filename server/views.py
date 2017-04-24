@@ -25,3 +25,7 @@ def get_forecast():
     subprocess.check_output(['/usr/bin/pngcrush', '-c', '0', '-nofilecheck', '/tmp/result.png', '/tmp/result_crush.png'])
 
     return send_file('/tmp/result_crush.png', mimetype='image/png')
+
+@server.route('/meteogalicia/timer')
+def get_timer():
+    return str(60*60*8)

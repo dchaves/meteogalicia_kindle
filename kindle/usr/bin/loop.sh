@@ -89,7 +89,8 @@ do_things() {
       done
       BATTERY_LEVEL="$(lipc-get-prop com.lab126.powerd battLevel)"
       URL="http://192.168.1.4:5080/meteogalicia?battery=$BATTERY_LEVEL"
-      curl "$URL" > "$SSFILE"
+      curl "$URL" > "$SSFILE" || eips 0 39 "I FAILED ON $(date)"
+      SLEEPTIME=$(curl http://192.168.1.4:5080/meteogalicia/timer || echo 600)
       eips -g "$SSFILE"
       sleep 5
       wifidisable
@@ -108,8 +109,8 @@ do_silent_things() {
       done
       BATTERY_LEVEL="$(lipc-get-prop com.lab126.powerd battLevel)"
       URL="http://192.168.1.4:5080/meteogalicia?battery=$BATTERY_LEVEL"
-      curl "$URL" > "$SSFILE"
-      SLEEPTIME=$(curl http://192.168.1.4:5080/meteogalicia/timer)
+      curl "$URL" > "$SSFILE" || eips 0 39 "I FAILED ON $(date)"
+      SLEEPTIME=$(curl http://192.168.1.4:5080/meteogalicia/timer || echo 600)
       wifidisable
       mntroot ro
       print "STEALTHY THINGS DONE"

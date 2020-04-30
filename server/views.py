@@ -4,6 +4,7 @@ from image_generator import ImageGenerator
 from flask import request
 from flask import send_file
 import subprocess
+from datetime import datetime, timedelta
 
 @server.route('/')
 @server.route('/index')
@@ -28,4 +29,7 @@ def get_forecast():
 
 @server.route('/meteogalicia/timer')
 def get_timer():
-    return str(60*60*8)
+    #return str(60*60*8)
+    update_hours = [4, 11, 18] ### UTC
+    now = datetime.now()
+    return str(int(min(map(lambda x:(datetime(now.year, now.month, now.day, x, 0, 0, 0) - now).total_seconds() if (datetime(now.year, now.month, now.day, x, 0, 0, 0) - now).total_seconds() > 0 else ((datetime(now.year, now.month, now.day, x, 0, 0, 0) + timedelta(days=1)) - now).total_seconds(), update_hours))))
